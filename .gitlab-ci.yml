@@ -45,9 +45,4 @@ sonarqube:
     GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
   script:
     - mvn compile
-    - mvn sonar:sonar -Dsonar.projectKey=Sonarqube-Workshop
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-    - if: $CI_PIPELINE_SOURCE == "schedule"
-
-    
+    - mvn sonar:sonar -Dsonar.projectKey=Sonarqube-Workshop   
