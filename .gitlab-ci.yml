@@ -19,11 +19,11 @@
 stages:          # List of stages for jobs, and their order of execution
   - build
   - test
-  - deploy
+  - lint
 
 build-job:       # This job runs in the build stage, which runs first.
   stage: build
-  image: maven:3.8.5-openjdk-17
+  image: maven:3.9.1-eclipse-temurin
   script:
     - echo "Compiling the code..."
     - mvn clean install
@@ -31,22 +31,18 @@ build-job:       # This job runs in the build stage, which runs first.
 
 unit-test-job:   # This job runs in the test stage.
   stage: test    # It only starts when the job in the build stage completes successfully.
-  image: maven:3.8.5-openjdk-17
+  image: maven:3.9.1-eclipse-temurin
   script:
     - echo "Running unit tests... "
     - mvn clean test
     
 
-lint-test-job:   # This job also runs in the test stage.
-  stage: test    # It can run at the same time as unit-test-job (in parallel).
+sonarqube:
+  stage: lint
+  image: maven:3.9.1-eclipse-temurin
+  variables:
+    SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
+    GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
   script:
-    - echo "Linting code... This will take about 10 seconds."
-    - sleep 10
-    - echo "No lint issues found."
-
-deploy-job:      # This job runs in the deploy stage.
-  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
-  environment: production
-  script:
-    - echo "Deploying application..."
-    - echo "Application successfully deployed."
+    - mvn clean test
+    - mvn sonar:sonar -Dsonar.projectKey=Sonarqube-Workshop   
