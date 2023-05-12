@@ -6,8 +6,10 @@ public class RockPaperScissors {
     String player1 = "";
     String player2 = "";
     private static final String SCISSORS = "scissors";
+    private static final String PAPER = "Paper";
+
     public String simulateComputerInput() {
-        String[] hands = {SCISSORS,"Rock", "Paper"};
+        String[] hands = {SCISSORS,"Rock", PAPER};
         SecureRandom rand = new SecureRandom();
         int rand_int1 = rand.nextInt(3);
         return hands[rand_int1];
@@ -20,7 +22,7 @@ public class RockPaperScissors {
         }
         switch (player1) {
             case "Scissors":
-                if (player2.equals("Paper")) {
+                if (player2.equals(PAPER)) {
                     System.out.println("You win! \n" + player1 + " beats " + player2 + "!!!");
                     return true;
                 } else return false;
@@ -31,7 +33,7 @@ public class RockPaperScissors {
                 }
 
                 break;
-            case "Paper":
+            case PAPER:
                 if (player2.equals("Rock")) {
                     System.out.println("You win! \n" + player1 + " beats " + player2 + "!!!");
                     return true;
