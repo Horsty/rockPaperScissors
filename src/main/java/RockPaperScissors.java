@@ -4,9 +4,9 @@ import java.util.Random;
 public class RockPaperScissors {
     String player1 = "";
     String player2 = "";
-
+    private static final String SCISSORS = "scissors";
     public String simulateComputerInput() {
-        String[] hands = {"Scissors","Rock", "Paper"};
+        String[] hands = {SCISSORS,"Rock", "Paper"};
         Random rand = new Random();
         int rand_int1 = rand.nextInt(3);
         return hands[rand_int1];
