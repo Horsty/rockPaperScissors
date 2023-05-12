@@ -10,7 +10,7 @@ public class RockPaperScissors {
 
     public String simulateComputerInput() {
         String[] hands = {SCISSORS,"Rock", PAPER};
-        Random rand = new Random();
+        SecureRandom rand = new SecureRandom();
         int rand_int1 = rand.nextInt(3);
         return hands[rand_int1];
     }
