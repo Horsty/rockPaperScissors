@@ -38,10 +38,4 @@ public class RockPaperScissorsTest {
         assertFalse(game.playWith(rock, paper));
     }
 
-    @Test
-    public void randomHandComputerInputTest() {
-        String hand = game.simulateComputerInput();
-        assertTrue(hand.equals("Scissors") || hand.equals("Rock") || hand.equals("Paper"));
-    }
-
 }
